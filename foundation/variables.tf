@@ -17,3 +17,15 @@ variable "private_subnet_a_cidr_block" {
 variable "private_subnet_b_cidr_block" {
   description = "Private Subnet B CIDR block (i.e. 0.0.0.0/0)"
 }
+
+variable "owner" {
+  description = "Name of the owner of the project. Could be your name or organization name for instance."
+}
+
+variable "project" {
+  description = "Name for the project that this foundation is being setup for."
+}
+
+variable "environment" {
+  description = "Either integration, staging or production"
+}
