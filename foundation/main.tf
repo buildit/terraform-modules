@@ -194,3 +194,30 @@ resource "aws_route_table_association" "subnet_private_b_association" {
   subnet_id      = "${aws_subnet.subnet_private_b.id}"
   route_table_id = "${aws_route_table.private_route_table_b.id}"
 }
+
+resource "aws_security_group" "lb_sg" {
+  name = "${var.owner}-${var.project}-${var.environment}-foundation-lb-sg"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_lb" "app_load_balancer" {
+  name            = "${var.owner}-${var.project}-${var.environment}-foundation-lb"
+  internal        = false
+  security_groups = ["${aws_security_group.lb_sg.id}"]
+  subnets         = ["${aws_subnet.subnet_public_a.id}","${aws_subnet.subnet_public_b.id}"]
+
+  enable_deletion_protection = false
+
+  tags {
+    "Name"        = "${var.owner}-${var.project}-${var.environment}-foundation-lb"
+    "Owner"       = "${var.owner}"
+    "Project"     = "${var.project}"
+    "Environment" = "${var.environment}"
+  }
+}
