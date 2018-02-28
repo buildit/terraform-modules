@@ -18,6 +18,7 @@ This module is used to setup a base infrastructure that is made up of the follow
 * 2 - Public Route Table Associations
 * 2 - Private Route Table Associations
 * 1 - Security Group for Load Balancer
+* 1 - Security Group Rule (ingress) for LB security group
 * 1 - Load Balancer
 
 ## Usage

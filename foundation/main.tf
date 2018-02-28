@@ -200,12 +200,23 @@ resource "aws_security_group" "lb_sg" {
   description = "Security group for the load balancer"
   vpc_id      = "${aws_vpc.vpc.id}"
 
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+  tags {
+    "Name"        = "${var.owner}-${var.project}-${var.environment}-foundation-lb-sg"
+    "Owner"       = "${var.owner}"
+    "Project"     = "${var.project}"
+    "Environment" = "${var.environment}"
   }
+}
+
+resource "aws_security_group_rule" "lb_sgr" {
+  description = "Security group ingress rule to allow all inbound traffic to the app load balancer on port 80."
+  type        = "ingress"
+  from_port   = 80
+  to_port     = 80
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = "${aws_security_group.lb_sg.id}"
 }
 
 resource "aws_lb" "app_load_balancer" {
