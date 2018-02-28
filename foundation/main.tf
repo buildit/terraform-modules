@@ -196,7 +196,9 @@ resource "aws_route_table_association" "subnet_private_b_association" {
 }
 
 resource "aws_security_group" "lb_sg" {
-  name = "${var.owner}-${var.project}-${var.environment}-foundation-lb-sg"
+  name        = "${var.owner}-${var.project}-${var.environment}-foundation-lb-sg"
+  description = "Security group for the load balancer"
+  vpc_id      = "${aws_vpc.vpc.id}"
 
   ingress {
     from_port   = 80
