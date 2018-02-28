@@ -207,7 +207,7 @@ resource "aws_security_group" "lb_sg" {
 }
 
 resource "aws_lb" "app_load_balancer" {
-  name            = "${var.owner}-${var.project}-${var.environment}-foundation-lb"
+  name            = "${var.app_lb_name}-foundation-lb"
   internal        = false
   security_groups = ["${aws_security_group.lb_sg.id}"]
   subnets         = ["${aws_subnet.subnet_public_a.id}","${aws_subnet.subnet_public_b.id}"]

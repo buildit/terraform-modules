@@ -18,6 +18,10 @@ variable "private_subnet_b_cidr_block" {
   description = "Private Subnet B CIDR block (i.e. 0.0.0.0/0)"
 }
 
+variable "app_lb_name" {
+  description = "Name to give to the application load balancer (cannot be more than 18 characters and cannot include spaces)."
+}
+
 variable "owner" {
   description = "Name of the owner of the project. Could be your name or organization name for instance."
 }
